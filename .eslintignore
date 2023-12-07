@@ -1,0 +1,6 @@
+build/*
+.vscode/*
+coverage/*
+deploy/cdk.out/*
+README.md
+tsconfig.json

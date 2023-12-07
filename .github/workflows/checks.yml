@@ -1,0 +1,90 @@
+# name: Template App CI # Change
+#
+# on:
+#   pull_request:
+#     branches:
+#       - "**"
+#
+# env:
+#   AWS_REGION: us-east-1
+#
+# permissions:
+#   contents: read
+#
+# jobs:
+#   build:
+#     name: Build
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v3
+#       - name: Checkout
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: 20
+#
+#       - name: Install Yarn
+#         run: npm install -g yarn
+#       - run: yarn
+#
+#       - name: Build App
+#         run: yarn build
+#
+#   lint:
+#     name: Lint
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v3
+#       - name: Checkout
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: 20
+#
+#       - name: Install Yarn
+#         run: npm install -g yarn
+#       - run: yarn
+#
+#       - name: Lint App
+#         run: |
+#           yarn format-ci
+#           yarn lint-ci
+#
+#   test:
+#     name: Test
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v3
+#       - name: Checkout
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: 20
+#
+#       - name: Install Yarn
+#         run: npm install -g yarn
+#       - run: yarn
+#
+#       - name: Test App
+#         run: yarn test
+#
+#   synth:
+#     name: Synth
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v3
+#
+#       - name: Install Yarn
+#         run: npm install -g yarn
+#       - run: yarn
+#
+#       - name: Configure AWS credentials
+#         uses: aws-actions/configure-aws-credentials@v1
+#         with:
+#           aws-access-key-id: ${{ secrets.ID }} # Must be configured in Repo Secrets
+#           aws-secret-access-key: ${{ secrets.KEY }} # Must be configured in Repo Secrets
+#           aws-region: ${{ env.AWS_REGION }}
+#
+#       - name: Install dependencies
+#         run: yarn
+#
+#       - name: Synth Stack
+#         run: yarn cdk synth
